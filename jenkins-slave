@@ -96,14 +96,8 @@ else
 	#TODO: Handle the case when the command-line and Environment variable contain different values.
 	#It is fine it blows up for now since it should lead to an error anyway.
 
-	exec $JAVA_BIN $JAVA_OPTS $JNLP_PROTOCOL_OPTS -cp /usr/share/jenkins/slave.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME "$@"
-
 echo "Update package index"
 yum update
-
-echo "Install Java JDK 8"
-yum remove -y java
-yum install -y java-1.8.0-openjdk
 
 echo "Install Docker engine"
 yum update -y
@@ -133,4 +127,8 @@ cp kiuwan_config/pipe-analisis.properties $AGENT_HOME/conf/
 chown -R jenkins:jenkins /opt
 
 #$AGENT_HOME/bin/agent.sh -n ${CIRCLE_PROJECT_REPONAME} -s ${HOME}/repo
+
+	exec $JAVA_BIN $JAVA_OPTS $JNLP_PROTOCOL_OPTS -cp /usr/share/jenkins/slave.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME "$@"
+
+
 fi
