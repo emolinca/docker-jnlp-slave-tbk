@@ -1,21 +1,8 @@
 
-echo "Update package index"
-yum update
-
-echo "Install Docker engine"
-yum update -y
-yum install docker -y
-usermod -aG docker ec2-user
-service docker start
-
-echo "Install git"
-yum install -y git
-
 echo "Install Maven"
 yum install maven
 
 echo "Install Kiuwan"
-
 echo $JAVA_HOME
 wget https://www.kiuwan.com/pub/analyzer/KiuwanLocalAnalyzer.zip -P .
 mkdir /opt/kiuwan
