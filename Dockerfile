@@ -22,7 +22,7 @@
 
 FROM jenkins/slave:3.29-2
 MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
-RUN echo "Install Maven"
+RUN echo "Install Maven" && \
 yum install maven && \
 echo "Install Kiuwan" && \
 echo $JAVA_HOME && \
