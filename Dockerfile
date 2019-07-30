@@ -22,8 +22,7 @@
 
 FROM jenkins/slave:3.29-2
 MAINTAINER Ed Molina <emolinca@gmail.com>
-RUN sudo apt-get update -y && \ 
-    sudo apt-get install -y wget
+RUN apt-get update && apt-get install -y vim nano zsh curl git sudo
 CMD wget -O- -q http://ifconfig.me/ip
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.29"
 COPY jenkins-slave /usr/local/bin/jenkins-slave
