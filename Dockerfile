@@ -23,7 +23,23 @@
 FROM jenkins/slave:3.29-2
 MAINTAINER Ed Molina <emolinca@gmail.com>
 USER root
-RUN apt-get update
+RUN apt-get -y update
+RUN apt -y install git
+RUN echo "Install Maven"
+RUN apt-get -y install maven
+RUN wget https://www.kiuwan.com/pub/analyzer/KiuwanLocalAnalyzer.zip -P .
+RUN mkdir /opt/kiuwan/
+RUN mkdir /opt/kiuwan/KiuwanLocalAnalyzer
+RUN unzip KiuwanLocalAnalyzer.zip -d /opt/kiuwan
+RUN chmod +x /opt/kiuwan/KiuwanLocalAnalyzer/bin/*.sh
+RUN export AGENT_HOME=/opt/kiuwan/KiuwanLocalAnalyzer
+RUN echo $AGENT_HOME
+RUN cd $AGENT_HOME && ls -la
+RUN cd /opt/kiuwan && ls -alt
+RUN git clone https://github.com/gtoledoe/kiuwan_config.git
+RUN pwd && ls -alt
+RUN ls -la $AGENT_HOME
+
 LABEL Description="This is a base image, JNLP, Java etc..."
-USER container
-ENTRYPOINT ["docker-jnlp-slave"]
+
+ENTRYPOINT ["jenkins-slave"]
