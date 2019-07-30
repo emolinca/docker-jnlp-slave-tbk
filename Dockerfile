@@ -22,9 +22,9 @@
 
 FROM jenkins/slave:3.29-2
 MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
-RUN yum -y update && \ 
+RUN apt-get -y update && \ 
 echo "Install Maven" && \
-yum install maven && \
+apt-get install maven && \
 echo "Install Kiuwan" && \
 echo $JAVA_HOME && \
 wget https://www.kiuwan.com/pub/analyzer/KiuwanLocalAnalyzer.zip -P . && \
