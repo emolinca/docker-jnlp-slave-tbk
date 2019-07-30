@@ -28,8 +28,6 @@ RUN apt -y install git
 RUN echo "Install Maven"
 RUN apt-get -y install maven
 
-USER jenkins
-
 LABEL Description="This is a base image, JNLP, Java etc..."
 
 ENTRYPOINT ["jenkins-slave"]
