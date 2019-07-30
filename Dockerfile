@@ -23,23 +23,17 @@
 FROM jenkins/slave:3.29-2
 MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
 RUN apt-get -y update && \ 
-echo "Install Maven" && \
-apt-get install maven && \
-echo "Install Kiuwan" && \
-echo $JAVA_HOME && \
-wget https://www.kiuwan.com/pub/analyzer/KiuwanLocalAnalyzer.zip -P . && \
+apt-get install maven
+
+RUN wget https://www.kiuwan.com/pub/analyzer/KiuwanLocalAnalyzer.zip -P . && \
 mkdir /opt/kiuwan && \
 unzip KiuwanLocalAnalyzer.zip -d /opt/kiuwan && \
 chmod +x /opt/kiuwan/KiuwanLocalAnalyzer/bin/*.sh && \
 export AGENT_HOME=/opt/kiuwan/KiuwanLocalAnalyzer && \
-echo $AGENT_HOME && \
 git clone https://github.com/emolinca/kiuwan.git && \
-cp kiuwan_config/pipe-analisis.properties $AGENT_HOME/conf/ && \
-chown -R jenkins:jenkins /opt && \
-#$AGENT_HOME/bin/agent.sh -n ${CIRCLE_PROJECT_REPONAME} -s ${HOME}/repo
-ADD script.sh ./script.sh
-LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.29"
+cp kiuwan_config/pipe-analisis.properties $AGENT_HOME/conf/
 
+LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.29"
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 
 ENTRYPOINT ["jenkins-slave"]
