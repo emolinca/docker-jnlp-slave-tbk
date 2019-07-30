@@ -20,14 +20,10 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM jenkins/slave:3.29-2
-MAINTAINER Ed Molina <emolinca@gmail.com>
-USER root
-RUN apt-get -y update
-RUN apt -y install git
-RUN echo "Install Maven"
-RUN apt-get -y install maven
+FROM jenkins/slave:latest-jdk11
+MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
+LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.27"
 
-LABEL Description="This is a base image, JNLP, Java etc..."
+COPY jenkins-slave /usr/local/bin/jenkins-slave
 
 ENTRYPOINT ["jenkins-slave"]
