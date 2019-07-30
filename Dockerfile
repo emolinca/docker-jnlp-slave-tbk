@@ -30,4 +30,6 @@ RUN apt-get -y install maven
 
 LABEL Description="This is a base image, JNLP, Java etc..."
 
-ENTRYPOINT ["jenkins-slave"]
+COPY jenkins-slave-tbk /usr/local/bin/jenkins-slave-tbk
+
+ENTRYPOINT ["jenkins-slave-tbk"]
