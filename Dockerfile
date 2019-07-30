@@ -25,6 +25,5 @@ MAINTAINER Ed Molina <emolinca@gmail.com>
 USER root
 RUN apt-get update
 LABEL Description="This is a base image, JNLP, Java etc..."
-COPY docker-jnlp-slave-tbk .
-
-ENTRYPOINT ["docker-jnlp-slave-tbk"]
+USER container
+ENTRYPOINT ["docker-jnlp-slave"]
