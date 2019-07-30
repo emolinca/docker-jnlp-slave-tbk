@@ -22,6 +22,7 @@
 
 FROM jenkins/slave:3.29-2
 MAINTAINER Ed Molina <emolinca@gmail.com>
+USER root
 RUN apt-get update
 LABEL Description="This is a base image, JNLP, Java etc..."
 COPY docker-jnlp-slave-tbk /usr/local/bin/jenkins-slave
