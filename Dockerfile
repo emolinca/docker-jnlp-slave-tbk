@@ -39,6 +39,7 @@ RUN cd /opt/kiuwan && ls -alt
 RUN git clone https://github.com/gtoledoe/kiuwan_config.git
 RUN pwd && ls -alt
 RUN ls -la $AGENT_HOME
+USER jenkins
 
 LABEL Description="This is a base image, JNLP, Java etc..."
 
